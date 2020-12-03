@@ -12,6 +12,7 @@ namespace Worms
         private KeyboardState _keyboardState;
 
         private Level _level;
+        private SpriteFont _testFont;
 
         public Game1()
         {
@@ -31,6 +32,7 @@ namespace Worms
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            _testFont = Content.Load<SpriteFont>("TestFont");
         }
 
         protected override void Update(GameTime gameTime)
@@ -52,7 +54,7 @@ namespace Worms
 
             // TODO: Add your drawing code here
             _spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
-            _level.Draw(_spriteBatch);
+            _level.Draw(_spriteBatch, _testFont);
             _spriteBatch.End();
 
             base.Draw(gameTime);

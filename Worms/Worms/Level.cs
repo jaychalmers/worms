@@ -37,14 +37,14 @@ namespace Worms
                 _worms[_currentWorm].Update(_collidables);
             }
         }
-
-        public void Draw(SpriteBatch spriteBatch)
+        
+        public void Draw(SpriteBatch spriteBatch, SpriteFont testFont)
         {
-            foreach(Worm w in _worms)
-            {
-                w.Draw(spriteBatch);
-            }
             _terrain.Draw(spriteBatch);
+            foreach (Worm w in _worms)
+            {
+                w.Draw(spriteBatch, testFont);
+            }
         }
     }
 }

@@ -134,13 +134,14 @@ namespace Worms
             return false;
         }
 
-        public void Draw(SpriteBatch batch)
+        public void Draw(SpriteBatch batch, SpriteFont testFont)
         {
             Rectangle rect = new Rectangle(
                 new Point((int)Pos.X - (Width/2), (int)Pos.Y - (Height/2)),
                 new Point(Width,Height)
             );
             batch.Draw(_texture, rect, Color.White);
+            batch.DrawString(testFont, "Worm state: " + _wormState.ToString(), new Vector2(0, 0), Color.Black);
         }
 
         private enum MovementDirection
