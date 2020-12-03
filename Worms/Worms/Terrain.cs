@@ -14,7 +14,7 @@ namespace Worms
         private readonly int _maxHeight;
         private const int IslandMarginPixels = 20;
         private const int ClimbModeChangeFactor = 30;
-
+        private const int SlopeFactor = 2;
 
         public Terrain(GraphicsDevice graphicsDevice)
         {
@@ -31,6 +31,11 @@ namespace Worms
 
         public bool WillCollide(Point point)
         {
+            if (point.X < 0 || point.X >= _columns.Length)
+            {
+                //out of bounds
+                return false;
+            }
             foreach(RLERange range in _columns[point.X].Ranges)
             {
                 if (point.Y <= range.Lower && point.Y >= range.Upper)
@@ -128,18 +133,19 @@ namespace Worms
 
         private int GetNextHeight(int currentHeight, TerrainGenClimbMode mode)
         {
+            Random rand = new Random();
             if (mode == TerrainGenClimbMode.Fall)
             {
                 if (currentHeight < _floor)
                 {
-                    return currentHeight + 1;
+                    return currentHeight + rand.Next(SlopeFactor) + 1;
                 }
             }
             else if (mode == TerrainGenClimbMode.Rise)
             {
                 if (currentHeight > _maxHeight)
                 {
-                    return currentHeight - 1;
+                    return currentHeight - rand.Next(SlopeFactor) - 1;
                 }
             }
             return currentHeight;
