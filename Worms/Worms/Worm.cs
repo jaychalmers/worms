@@ -79,7 +79,7 @@ namespace Worms
 
         private void CheckForFall(IReadOnlyCollection<ICollidable> collidables)
         {
-            Point ground = new Point((int)Pos.X, (int)Pos.Y - Height / 2);
+            Point ground = new Point((int)Pos.X, (int)Pos.Y + Height / 2);
             foreach(ICollidable col in collidables)
             {
                 if (col.WillCollide(ground))
